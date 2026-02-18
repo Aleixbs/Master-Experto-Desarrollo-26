@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Aplicación de locales</title>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.34/esri/themes/dark/main.css" />
+    <script src="https://js.arcgis.com/4.34/"></script>
+
+
+    <script defer>
+        require([
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/geometry/Point",
+            "esri/Graphic",
+        ], (
+            Map,
+            MapView,
+            Point,
+            Graphic
+        ) => {
+
+            const mapa = new Map({
+                basemap: 'streets-night-vector'
+            })
+
+            const vistaMapa = new MapView({
+                container: 'viewDiv',
+                map: mapa,
+                center: [-3.7, 40.40],
+                zoom: 6
+            })
+
+            const boton = document.getElementById('cargarDatos')
+
+            boton.addEventListener('click', () => {
+                fetch('http://127.0.0.1:8000/api/locales').then((respuesta) => {
+                    console.log(respuesta)
+                    respuesta.json().then((jsonData) => {
+
+                        const datos = jsonData.data
+
+                        datos.map((local) => {
+                            const Punto = new Point({
+                                latitude: local.latitud,
+                                longitude: local.longitud
+                            })
+
+                            const puntoLocal = new Graphic({
+                                geometry: Punto,
+                                symbol: {
+                                    type: "simple-marker",
+                                    color: "white",
+                                    //    size: 8,
+                                    //   outline: {
+                                    //       width: 0.5,
+                                    //       color: "darkblue"
+                                    //   } 
+                                }
+                            })
+
+                            vistaMapa.graphics.add(puntoLocal)
+                        })
+
+
+                    })
+                })
+            })
+        })
+    </script>
+
+
+    <style>
+        body {
+            width: 100vw;
+            height: 100vh;
+            margin: 0
+        }
+
+        #viewDiv {
+            width: 100%;
+            height: 100%;
+        }
+
+        #cargarDatos {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+        }
+    </style>
+
+</head>
+
+<body>
+    <div id="viewDiv"></div>
+    <button id="cargarDatos"> Cargar Datos </button>
+</body>
+
+</html>

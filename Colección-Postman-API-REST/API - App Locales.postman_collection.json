@@ -1,0 +1,106 @@
+{
+  "info": {
+    "_postman_id": "c72bf663-4beb-457d-b6e0-5829856946a6",
+    "name": "API - App Locales",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "28027312"
+  },
+  "item": [
+    {
+      "name": "Locales",
+      "item": [
+        {
+          "name": "Locales",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/locales",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "locales"
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local ID",
+          "request": {
+            "method": "GET",
+            "header": [],
+            "url": {
+              "raw": "{{host}}/api/locales/:id",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "locales",
+                ":id"
+              ],
+              "variable": [
+                {
+                  "key": "id",
+                  "value": "4"
+                }
+              ]
+            }
+          },
+          "response": []
+        },
+        {
+          "name": "Local",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "exec": [
+                  "\r",
+                  "let aforo = pm.environment.replaceIn(\"{{$randomInt}}\")\r",
+                  "let longitud = pm.environment.replaceIn(\"{{$randomLongitude}}\")\r",
+                  "let latitud = pm.environment.replaceIn(\"{{$randomLatitude}}\")\r",
+                  "\r",
+                  "pm.environment.set(\"aforo\",aforo)\r",
+                  "pm.environment.set(\"longitud\",longitud)\r",
+                  "pm.environment.set(\"latitud\",latitud)\r",
+                  ""
+                ],
+                "type": "text/javascript",
+                "packages": {},
+                "requests": {}
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{\r\n    \"local\":\"{{local}}\",\r\n    \"nombre\":\"{{nombre}}\",\r\n    \"aforo\":{{aforo}},\r\n    \"longitud\": {{longitud}},\r\n    \"latitud\": {{latitud}}\r\n}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": {
+              "raw": "{{host}}/api/locales",
+              "host": [
+                "{{host}}"
+              ],
+              "path": [
+                "api",
+                "locales"
+              ]
+            }
+          },
+          "response": []
+        }
+      ]
+    }
+  ]
+}
