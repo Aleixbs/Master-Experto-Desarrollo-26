@@ -1,5 +1,5 @@
 # Master-Experto-Desarrollo-26
-Curso Experto en Desarrollo 2026 ![esri](https://raw.githubusercontent.com/aleixbs/Master-Experto-Desarrollo-26/main/Esri_idKzOT9VMe_1.png)
+Curso Experto en Desarrollo 2026 API REST ![esri](https://raw.githubusercontent.com/aleixbs/Master-Experto-Desarrollo-26/main/Esri_idKzOT9VMe_1.png)
 
 Esta colección contiene ejemplos de algunos de los servicios de la [API REST de ArcGIS](https://developers.arcgis.com/rest/).
 
